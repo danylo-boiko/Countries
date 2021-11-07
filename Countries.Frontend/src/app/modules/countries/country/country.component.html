@@ -1,0 +1,12 @@
+<div class="card">
+  <div *ngIf="country">
+    <mat-card>
+      <mat-card-title>{{country.name}}</mat-card-title>
+      <mat-card-subtitle>{{country.continent.toString()}}, {{country.area}} km²</mat-card-subtitle>
+      <mat-card-content>
+        <p>{{country.description}}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <button class="card-btn" mat-stroked-button (click)="goBack()">Go back</button>
+</div>

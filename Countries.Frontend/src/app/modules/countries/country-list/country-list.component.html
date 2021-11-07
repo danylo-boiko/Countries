@@ -1,0 +1,5 @@
+<mat-nav-list>
+  <ng-container *ngFor="let country of countries; let i = index">
+    <a mat-list-item (click)="selectCountry(country.id)"> {{i+1}}. {{country.name}}, {{country.continent.toString()}} </a>
+  </ng-container>
+</mat-nav-list>
