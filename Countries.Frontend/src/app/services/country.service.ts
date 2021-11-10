@@ -22,4 +22,19 @@ export class CountryService {
     const path = `${this.apiBaseUri}/countries/${id}`;
     return this.http.get(path);
   }
+
+  createCountry(country: Country): Observable<any> {
+    const path = `${this.apiBaseUri}/countries`;
+    return this.http.post(path, country);
+  }
+
+  updateCountry(country: Country): Observable<any> {
+    const path = `${this.apiBaseUri}/countries/${country.id}`;
+    return this.http.put(path, country);
+  }
+
+  deleteCountry(id: Guid): Observable<any> {
+    const path = `${this.apiBaseUri}/countries/${id}`;
+    return this.http.delete(path);
+  }
 }
