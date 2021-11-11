@@ -3,7 +3,7 @@
     <form #createCountryForm="ngForm" (ngSubmit)="createCountry(createCountryForm.value)">
       <mat-form-field class="form-field" appearance="outline">
         <mat-label> Name </mat-label>
-        <input type="text" name="name" #name="ngModel" matInput required ngModel/>
+        <input matInput name="name" required #name="ngModel" ngModel/>
         <mat-error *ngIf="name.errors">
           <span *ngIf="name.errors.required">This field is required.</span>
         </mat-error>
@@ -11,7 +11,7 @@
 
       <mat-form-field class="form-field" appearance="outline">
         <mat-label> Area </mat-label>
-        <input type="number" name="area" #area="ngModel" matInput required min="0" ngModel/>
+        <input matInput type="number" name="area" required min="0" #area="ngModel" ngModel/>
         <mat-error *ngIf="area.errors">
           <span *ngIf="area.errors.min">This field allows only positive value.</span>
           <span *ngIf="area.errors.required">This field is required.</span>
@@ -20,7 +20,7 @@
 
       <mat-form-field class="form-field" appearance="outline">
         <mat-label>Continent</mat-label>
-        <mat-select name="continent" #continent="ngModel" required ngModel>
+        <mat-select name="continent" required #continent="ngModel" ngModel>
           <mat-option *ngFor="let continent of continents" [value]="continent.value">{{continent.value}}</mat-option>
         </mat-select>
         <mat-error *ngIf="continent.errors">
@@ -30,13 +30,13 @@
 
       <mat-form-field class="form-field" appearance="outline">
         <mat-label> Description </mat-label>
-        <input type="text" name="description" #description="ngModel" matInput required minlength="10" ngModel/>
+        <input matInput name="description" required minlength="10" #description="ngModel" ngModel/>
         <mat-error *ngIf="description.errors">
           <span *ngIf="description.errors.required || description.errors.minlength">The minimum length of this field is 10 characters.</span>
         </mat-error>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" type="submit" [disabled]="!createCountryForm.form.valid">Create</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!createCountryForm.form.valid">Add country</button>
     </form>
   </div>
 </div>

@@ -12,7 +12,7 @@ import { Router } from "@angular/router";
 export class CountryListComponent implements OnInit, DoCheck {
   public countries: Country[] = [];
 
-  constructor(private countryService: CountryService, private router: Router) { }
+  constructor(private countryService: CountryService, private router: Router) {}
 
   ngOnInit(): void {
     this.countryService.getCountries().subscribe(

@@ -18,7 +18,7 @@ export class CreateCountryComponent implements OnInit {
   ngOnInit(): void {}
 
   createCountry(value: any) {
-    let newCountry: Country = {
+    const newCountry: Country = {
       id: Guid.create(),
       name: value.name,
       area: value.area,
