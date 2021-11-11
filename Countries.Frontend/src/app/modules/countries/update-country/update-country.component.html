@@ -1,6 +1,6 @@
 <div class="container">
   <div class="form-container">
-    <form [formGroup]="updateCountryForm" (ngSubmit)="updateCountry()">
+    <form [formGroup]="updateCountryForm" (ngSubmit)="updateCountry()" *ngIf="updateCountryForm">
       <mat-form-field class="form-field" appearance="outline">
         <mat-label> Name </mat-label>
         <input matInput formControlName="name"/>
