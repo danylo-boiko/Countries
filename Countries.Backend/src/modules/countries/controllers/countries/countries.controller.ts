@@ -20,13 +20,12 @@ export class CountriesController {
     }
 
     @Post()
-    @UsePipes(new CountryValidationPipe())
-    createCountry(@Body() createRequest: CreateCountryRequest): Promise<Country> {
+    createCountry(@Body(new CountryValidationPipe()) createRequest: CreateCountryRequest): Promise<Country> {
         return this.countriesService.createCountry(createRequest);
     }
 
     @Put(':id')
-    updateCountry(@Param('id', ParseUUIDPipe) id, @Body() updateRequest: UpdateCountryRequest): Promise<Country> {
+    updateCountry(@Param('id', ParseUUIDPipe) id, @Body(new CountryValidationPipe()) updateRequest: UpdateCountryRequest): Promise<Country> {
         return this.countriesService.updateCountry(id, updateRequest);
     }
 

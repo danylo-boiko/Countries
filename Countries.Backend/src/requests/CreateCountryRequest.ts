@@ -1,4 +1,4 @@
-import { IsEnum, IsNotEmpty } from "class-validator";
+import { IsEnum, IsNotEmpty, Min, MinLength } from "class-validator";
 import { Continent } from "../enums/continent";
 
 export class CreateCountryRequest {
@@ -6,11 +6,13 @@ export class CreateCountryRequest {
     name: string;
 
     @IsNotEmpty()
+    @Min(0)
     area: number;
 
     @IsEnum(Continent)
     continent: Continent;
 
     @IsNotEmpty()
+    @MinLength(10)
     description: string;
 }
