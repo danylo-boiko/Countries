@@ -1,52 +1,55 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Country } from "../../../../entities/country.entity";
 import { Guid } from "guid-typescript";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { UpdateCountryRequest } from "../../../../requests/UpdateCountryRequest";
-import { CreateCountryRequest } from "../../../../requests/CreateCountryRequest";
+import { UpdateCountryRequest } from "../../requests/update-country-request";
+import { CreateCountryRequest } from "../../requests/create-country-request";
 
 @Injectable()
 export class CountriesService {
-    constructor(@InjectRepository(Country) private countryRepository: Repository<Country>) {}
+    constructor(@InjectRepository(Country) private readonly countryRepository: Repository<Country>) {}
 
     async getCountries(): Promise<Country[]> {
         return await this.countryRepository.find();
     }
 
     async getCountry(id: Guid): Promise<Country> {
-        return await this.countryRepository.findOne({
-            where: { id : id }
-        });
+        return await this.countryRepository.findOne({ where: { id } });
     }
 
     async createCountry(createRequest: CreateCountryRequest): Promise<Country> {
-        let storedCountry = new Country();
+        const { name, area, continent, description } = createRequest;
 
-        storedCountry.name = createRequest.name;
-        storedCountry.area = createRequest.area;
-        storedCountry.continent = createRequest.continent;
-        storedCountry.description = createRequest.description;
-        await this.countryRepository.save(storedCountry);
+        const createdCountry: Country = await this.countryRepository.create({
+            name, area, continent, description
+        });
 
-        return await this.getCountry(storedCountry.id);
+        await this.countryRepository.save(createdCountry);
+
+        return createdCountry;
     }
 
     async updateCountry(id: Guid, updateRequest: UpdateCountryRequest): Promise<Country> {
-        let storedCountry = await this.getCountry(id);
+        const storedCountry = await this.getCountry(id);
 
-        storedCountry.name = updateRequest.name;
-        storedCountry.area = updateRequest.area;
-        storedCountry.continent = updateRequest.continent;
-        storedCountry.description = updateRequest.description;
-        await this.countryRepository.save(storedCountry);
+        if (!storedCountry) {
+            throw new HttpException(`Country with id ${id} not found`, HttpStatus.BAD_REQUEST);
+        }
+
+        await this.countryRepository.update({ id }, updateRequest);
 
         return await this.getCountry(storedCountry.id);
     }
 
-    async deleteCountry(id: Guid) : Promise<Country> {
-        let storedCountry = await this.getCountry(id);
-        await this.countryRepository.remove(storedCountry);
+    async deleteCountry(id: Guid): Promise<Country> {
+        const storedCountry = await this.getCountry(id);
+
+        if (!storedCountry) {
+            throw new HttpException(`Country with id ${id} not found`, HttpStatus.BAD_REQUEST);
+        }
+
+        await this.countryRepository.delete({ id });
 
         return storedCountry;
     }

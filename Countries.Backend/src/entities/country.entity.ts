@@ -3,7 +3,7 @@ import { Guid } from "guid-typescript";
 import { Continent } from "../enums/continent";
 
 @Entity()
-export class Country{
+export class Country {
     @PrimaryGeneratedColumn('uuid')
     id: Guid;
 

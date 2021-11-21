@@ -3,3 +3,7 @@
     <a mat-list-item (click)="selectCountry(country.id)"> {{i+1}}. {{country.name}}, {{country.continent.toString()}} </a>
   </ng-container>
 </mat-nav-list>
+
+<div class="empty-list-alert" *ngIf="countries.length === 0">
+  <p>List is empty</p>
+</div>

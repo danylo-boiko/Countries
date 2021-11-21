@@ -1,4 +1,4 @@
-export enum Continent{
+export enum Continent {
     Asia = "Asia",
     Africa = "Africa",
     North_America = "North America",

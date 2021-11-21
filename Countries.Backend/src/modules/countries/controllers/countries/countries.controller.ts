@@ -1,36 +1,40 @@
-import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Post, Put, UsePipes } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Post, Put, UseGuards, UsePipes } from '@nestjs/common';
 import { CountriesService } from "../../services/countries/countries.service";
-import { CountryValidationPipe } from "../../../../pipes/country-validation.pipe";
+import { ValidationPipe } from "../../../../pipes/validation.pipe";
 import { Country } from "../../../../entities/country.entity";
-import { UpdateCountryRequest } from "../../../../requests/UpdateCountryRequest";
-import { CreateCountryRequest } from "../../../../requests/CreateCountryRequest";
+import { UpdateCountryRequest } from "../../requests/update-country-request";
+import { CreateCountryRequest } from "../../requests/create-country-request";
+import { AuthGuard } from "@nestjs/passport";
 
 @Controller('countries')
 export class CountriesController {
     constructor(private countriesService: CountriesService) {}
 
     @Get()
-    getCountries(): Promise<Country[]> {
+    public getCountries(): Promise<Country[]> {
         return this.countriesService.getCountries();
     }
 
     @Get(':id')
-    getCountry(@Param('id', ParseUUIDPipe) id): Promise<Country> {
+    public getCountry(@Param('id', ParseUUIDPipe) id): Promise<Country> {
         return this.countriesService.getCountry(id);
     }
 
     @Post()
-    createCountry(@Body(new CountryValidationPipe()) createRequest: CreateCountryRequest): Promise<Country> {
+    @UseGuards(AuthGuard())
+    public createCountry(@Body(new ValidationPipe()) createRequest: CreateCountryRequest): Promise<Country> {
         return this.countriesService.createCountry(createRequest);
     }
 
     @Put(':id')
-    updateCountry(@Param('id', ParseUUIDPipe) id, @Body(new CountryValidationPipe()) updateRequest: UpdateCountryRequest): Promise<Country> {
+    @UseGuards(AuthGuard())
+    public updateCountry(@Param('id', ParseUUIDPipe) id, @Body(new ValidationPipe()) updateRequest: UpdateCountryRequest): Promise<Country> {
         return this.countriesService.updateCountry(id, updateRequest);
     }
 
     @Delete(':id')
-    deleteCountry(@Param('id', ParseUUIDPipe) id): Promise<Country> {
+    @UseGuards(AuthGuard())
+    public deleteCountry(@Param('id', ParseUUIDPipe) id): Promise<Country> {
         return this.countriesService.deleteCountry(id);
     }
 }
