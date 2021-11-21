@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { Guid } from "guid-typescript";
-import { Continent } from "../enums/continent";
+import { Continent } from "../enums/continent.enum";
 
 @Entity()
 export class Country {
