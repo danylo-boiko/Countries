@@ -1,6 +1,6 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
-import { Country } from "../../../models/country";
-import { CountryService } from "../../../services/country.service";
+import { Country } from "../../../models/country.model";
+import { CountriesService } from "../../../services/countries/countries.service";
 import { Guid } from "guid-typescript";
 import { Router } from "@angular/router";
 
@@ -12,16 +12,16 @@ import { Router } from "@angular/router";
 export class CountryListComponent implements OnInit, DoCheck {
   public countries: Country[] = [];
 
-  constructor(private countryService: CountryService, private router: Router) {}
+  constructor(private countriesService: CountriesService, private router: Router) {}
 
   ngOnInit(): void {
-    this.countryService.getCountries().subscribe(
-      countries => this.countryService.countries = countries
+    this.countriesService.getCountries().subscribe(
+      countries => this.countriesService.countries = countries
     );
   }
 
   ngDoCheck(): void {
-    this.countries = this.countryService.countries;
+    this.countries = this.countriesService.countries;
   }
 
   selectCountry(id: Guid) {

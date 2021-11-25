@@ -1,5 +1,5 @@
 import { Guid } from "guid-typescript";
-import { Continent } from "../enums/continent";
+import { Continent } from "../enums/continent.enum";
 
 export interface Country {
   id: Guid,

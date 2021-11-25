@@ -2,8 +2,8 @@
   "type" : "postgres",
   "host": "localhost",
   "port": 5432,
-  "username": "postgres",
-  "password": "",
+  "username": "countries_user",
+  "password": "pa55word",
   "database": "county_db",
   "entities": ["dist/**/*.entity{.ts,.js}"],
   "synchronize": true

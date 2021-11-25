@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Country } from "../../../models/country";
-import { CountryService } from "../../../services/country.service";
+import { Country } from "../../../models/country.model";
+import { CountriesService } from "../../../services/countries/countries.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Continent } from "../../../enums/continent";
+import { Continent } from "../../../enums/continent.enum";
 import { AbstractControl, FormControl, FormGroup, Validators } from "@angular/forms";
 
 @Component({
@@ -15,12 +15,12 @@ export class UpdateCountryComponent implements OnInit {
   public updateCountryForm!: FormGroup;
   public storedCountry!: Country;
 
-  constructor(private countryService: CountryService, private activatedRoute: ActivatedRoute, private router: Router) {}
+  constructor(private countriesService: CountriesService, private activatedRoute: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     const countryId = this.activatedRoute.snapshot.params['id'];
 
-    this.countryService.getCountry(countryId).subscribe(
+    this.countriesService.getCountry(countryId).subscribe(
       country => {
         if (country) {
           this.storedCountry = country
@@ -47,7 +47,7 @@ export class UpdateCountryComponent implements OnInit {
       description: this.updateCountryForm.value.description
     };
 
-    this.countryService.updateCountry(updatedCountry).subscribe(_ => {
+    this.countriesService.updateCountry(updatedCountry).subscribe(_ => {
       this.router.navigate(['/countries']);
     });
   }

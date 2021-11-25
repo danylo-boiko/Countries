@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CountryService } from "../../../services/country.service";
-import { Continent } from "../../../enums/continent";
+import { CountriesService } from "../../../services/countries/countries.service";
+import { Continent } from "../../../enums/continent.enum";
 import { Guid } from "guid-typescript";
 import { Router } from "@angular/router";
-import { Country } from "../../../models/country";
+import { Country } from "../../../models/country.model";
 
 @Component({
   selector: 'app-create-country',
@@ -13,7 +13,7 @@ import { Country } from "../../../models/country";
 export class CreateCountryComponent implements OnInit {
   public continents = Object.entries(Continent).map(([key, value]) => ({ key, value }));
 
-  constructor(private countryService: CountryService, private router: Router) {}
+  constructor(private countriesService: CountriesService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -26,7 +26,7 @@ export class CreateCountryComponent implements OnInit {
       description: value.description
     };
 
-    this.countryService.createCountry(newCountry).subscribe(res => {
+    this.countriesService.createCountry(newCountry).subscribe(_ => {
       this.router.navigate(['/countries']);
     });
   }

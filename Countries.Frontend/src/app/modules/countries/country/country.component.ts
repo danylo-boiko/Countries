@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Country } from "../../../models/country";
-import { CountryService } from "../../../services/country.service";
+import { Country } from "../../../models/country.model";
+import { CountriesService } from "../../../services/countries/countries.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Guid } from "guid-typescript";
 
@@ -12,12 +12,12 @@ import { Guid } from "guid-typescript";
 export class CountryComponent implements OnInit {
   public country: Country | undefined;
 
-  constructor(private countryService: CountryService, private activatedRoute: ActivatedRoute, private router: Router) {}
+  constructor(private countriesService: CountriesService, private activatedRoute: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     const countryId = this.activatedRoute.snapshot.params['id'];
 
-    this.countryService.getCountry(countryId).subscribe(
+    this.countriesService.getCountry(countryId).subscribe(
       country => {
         if (country) {
           this.country = country;
@@ -33,7 +33,7 @@ export class CountryComponent implements OnInit {
   }
 
   deleteCountry(id: Guid) {
-    this.countryService.deleteCountry(id).subscribe(_ => {
+    this.countriesService.deleteCountry(id).subscribe(_ => {
       this.router.navigate(['/countries']);
     })
   }
