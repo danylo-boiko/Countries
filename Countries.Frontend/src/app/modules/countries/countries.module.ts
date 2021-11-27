@@ -16,19 +16,19 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 
 const routes: Routes = [
-  { path: 'countries', component: CountryListComponent },
-  { path: 'countries/create', component: CreateCountryComponent },
-  { path: 'countries/:id', component: CountryComponent },
-  { path: 'countries/update/:id', component: UpdateCountryComponent }
+    { path: 'countries', component: CountryListComponent },
+    { path: 'countries/create', component: CreateCountryComponent },
+    { path: 'countries/:id', component: CountryComponent },
+    { path: 'countries/update/:id', component: UpdateCountryComponent }
 ]
 
 @NgModule({
-  declarations: [
-    CountryComponent,
-    CountryListComponent,
-    CreateCountryComponent,
-    UpdateCountryComponent
-  ],
+    declarations: [
+        CountryComponent,
+        CountryListComponent,
+        CreateCountryComponent,
+        UpdateCountryComponent
+    ],
     imports: [
         BrowserModule,
         RouterModule.forChild(routes),
@@ -42,9 +42,9 @@ const routes: Routes = [
         BrowserAnimationsModule,
         ReactiveFormsModule
     ],
-  exports: [
-    RouterModule
-  ]
+    exports: [
+        RouterModule
+    ]
 })
 
 export class CountriesModule {}

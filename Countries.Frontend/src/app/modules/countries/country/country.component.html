@@ -1,17 +1,18 @@
 <div class="card">
-  <div *ngIf="country">
-    <mat-card>
-      <mat-card-title>{{country.name}}</mat-card-title>
-      <mat-card-subtitle>{{country.continent.toString()}}, {{country.area}} km²</mat-card-subtitle>
-      <mat-card-content>
-        <p>{{country.description}}</p>
-      </mat-card-content>
-      <mat-divider inset></mat-divider>
-      <mat-card-actions>
-        <button mat-button (click)="updateCountry(country.id)">Update</button>
-        <button mat-button (click)="deleteCountry(country.id)">Delete</button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
-  <button mat-raised-button class="card-btn" color="primary" (click)="goBack()">Go back</button>
+    <div *ngIf="country">
+        <mat-card>
+            <mat-card-title>{{country.name}}</mat-card-title>
+            <mat-card-subtitle>{{country.continent.toString()}}, {{country.area}} km²</mat-card-subtitle>
+            <mat-card-content>
+                <p>{{country.description}}</p>
+            </mat-card-content>
+            <mat-divider inset></mat-divider>
+            <mat-card-actions>
+                <button mat-button (click)="updateCountry(country.id)">Update</button>
+                <button mat-button (click)="deleteCountry(country.id)">Delete</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+
+    <button mat-raised-button class="card-btn" color="primary" (click)="goBack()">Go back</button>
 </div>

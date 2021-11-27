@@ -1,1 +1,29 @@
-<p>register works!</p>
+<div class="container">
+    <div class="form-container">
+        <form [formGroup]="registerForm" (ngSubmit)="register()" *ngIf="registerForm">
+            <mat-error class="form-main-error" *ngIf="error"> {{ error }} </mat-error>
+
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label> Username </mat-label>
+                <input matInput formControlName="username"/>
+                <mat-error>
+                    <span *ngIf="!isFieldValid('username', 'required')">This field is required</span>
+                    <span *ngIf="!isFieldValid('username', 'minlength')">Min length for this field is 3 characters</span>
+                    <span *ngIf="!isFieldValid('username', 'maxlength')">Max length for this field is 32 characters</span>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label> Password </mat-label>
+                <input matInput formControlName="password"/>
+                <mat-error>
+                    <span *ngIf="!isFieldValid('password', 'required')">This field is required</span>
+                    <span *ngIf="!isFieldValid('password', 'minlength')">Min length for this field is 8 characters</span>
+                    <span *ngIf="!isFieldValid('password', 'maxlength')">Max length for this field is 100 characters</span>
+                </mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button type="submit" color="primary" [disabled]="!isFieldValid()">Register</button>
+        </form>
+    </div>
+</div>

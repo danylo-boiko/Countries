@@ -6,28 +6,26 @@ import { Router } from "@angular/router";
 import { Country } from "../../../models/country.model";
 
 @Component({
-  selector: 'app-create-country',
-  templateUrl: './create-country.component.html',
-  styleUrls: ['./create-country.component.scss']
+    selector: 'app-create-country',
+    templateUrl: './create-country.component.html',
+    styleUrls: ['./create-country.component.scss']
 })
 export class CreateCountryComponent implements OnInit {
-  public continents = Object.entries(Continent).map(([key, value]) => ({ key, value }));
+    public continents = Object.entries(Continent).map(([key, value]) => ({ key, value }));
+    public error: string = "";
 
-  constructor(private countriesService: CountriesService, private router: Router) {}
+    constructor(private countriesService: CountriesService, private router: Router) {}
 
-  ngOnInit(): void {}
+    ngOnInit(): void {}
 
-  createCountry(value: any) {
-    const newCountry: Country = {
-      id: Guid.create(),
-      name: value.name,
-      area: value.area,
-      continent: value.continent,
-      description: value.description
-    };
+    createCountry(value: any) {
+        const { name, area, continent, description } = value;
+        const newCountry: Country = { id: Guid.create(), name, area, continent, description };
 
-    this.countriesService.createCountry(newCountry).subscribe(_ => {
-      this.router.navigate(['/countries']);
-    });
-  }
+        this.countriesService.createCountry(newCountry).subscribe(_ => {
+            this.router.navigate(['/countries']);
+        },error => {
+            this.error = error.error.message;
+        });
+    }
 }

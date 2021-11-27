@@ -1,42 +1,44 @@
 <div class="container">
-  <div class="form-container">
-    <form #createCountryForm="ngForm" (ngSubmit)="createCountry(createCountryForm.value)">
-      <mat-form-field class="form-field" appearance="outline">
-        <mat-label> Name </mat-label>
-        <input matInput name="name" required #name="ngModel" ngModel/>
-        <mat-error *ngIf="name.errors">
-          <span *ngIf="name.errors.required">This field is required.</span>
-        </mat-error>
-      </mat-form-field>
+    <div class="form-container">
+        <form #createCountryForm="ngForm" (ngSubmit)="createCountry(createCountryForm.value)">
+            <mat-error class="form-main-error" *ngIf="error"> {{ error }} </mat-error>
 
-      <mat-form-field class="form-field" appearance="outline">
-        <mat-label> Area </mat-label>
-        <input matInput type="number" name="area" required min="0" #area="ngModel" ngModel/>
-        <mat-error *ngIf="area.errors">
-          <span *ngIf="area.errors.min">This field allows only positive value.</span>
-          <span *ngIf="area.errors.required">This field is required.</span>
-        </mat-error>
-      </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label> Name </mat-label>
+                <input matInput name="name" required #name="ngModel" ngModel/>
+                <mat-error *ngIf="name.errors">
+                    <span *ngIf="name.errors.required">This field is required.</span>
+                </mat-error>
+            </mat-form-field>
 
-      <mat-form-field class="form-field" appearance="outline">
-        <mat-label> Continent </mat-label>
-        <mat-select name="continent" required #continent="ngModel" ngModel>
-          <mat-option *ngFor="let continent of continents" [value]="continent.value">{{continent.value}}</mat-option>
-        </mat-select>
-        <mat-error *ngIf="continent.errors">
-          <span *ngIf="continent.errors.required">This field is required.</span>
-        </mat-error>
-      </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label> Area </mat-label>
+                <input matInput type="number" name="area" required min="0" #area="ngModel" ngModel/>
+                <mat-error *ngIf="area.errors">
+                    <span *ngIf="area.errors.min">This field allows only positive value.</span>
+                    <span *ngIf="area.errors.required">This field is required.</span>
+                </mat-error>
+            </mat-form-field>
 
-      <mat-form-field class="form-field" appearance="outline">
-        <mat-label> Description </mat-label>
-        <input matInput name="description" required minlength="10" #description="ngModel" ngModel/>
-        <mat-error *ngIf="description.errors">
-          <span *ngIf="description.errors.required || description.errors.minlength">The minimum length of this field is 10 characters.</span>
-        </mat-error>
-      </mat-form-field>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label> Continent </mat-label>
+                <mat-select name="continent" required #continent="ngModel" ngModel>
+                    <mat-option *ngFor="let continent of continents" [value]="continent.value">{{continent.value}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="continent.errors">
+                    <span *ngIf="continent.errors.required">This field is required.</span>
+                </mat-error>
+            </mat-form-field>
 
-      <button mat-raised-button color="primary" type="submit" [disabled]="!createCountryForm.form.valid">Add country</button>
-    </form>
-  </div>
+            <mat-form-field class="form-field" appearance="outline">
+                <mat-label> Description </mat-label>
+                <input matInput name="description" required minlength="10" #description="ngModel" ngModel/>
+                <mat-error *ngIf="description.errors">
+                    <span *ngIf="description.errors.required || description.errors.minlength">The minimum length of this field is 10 characters.</span>
+                </mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" type="submit" [disabled]="!createCountryForm.form.valid">Add country</button>
+        </form>
+    </div>
 </div>
