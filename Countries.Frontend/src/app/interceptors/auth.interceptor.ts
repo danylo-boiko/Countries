@@ -12,7 +12,8 @@ export class AuthInterceptor implements HttpInterceptor {
     constructor() {}
 
     intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-        const token = JSON.parse(<string>localStorage.getItem('currentUserToken'))
+        const token = JSON.parse(<string>localStorage.getItem('currentUserToken'));
+
         if (token) {
             request = request.clone({
                 setHeaders: {
@@ -20,6 +21,7 @@ export class AuthInterceptor implements HttpInterceptor {
                 }
             });
         }
+
         return next.handle(request);
     }
 }

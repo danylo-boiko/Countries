@@ -3,6 +3,7 @@ import { Country } from "../../../models/country.model";
 import { CountriesService } from "../../../services/countries/countries.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Guid } from "guid-typescript";
+import { AuthService } from "../../../services/auth/auth.service";
 
 @Component({
     selector: 'app-country',
@@ -12,7 +13,8 @@ import { Guid } from "guid-typescript";
 export class CountryComponent implements OnInit {
     public country: Country | undefined;
 
-    constructor(private countriesService: CountriesService, private activatedRoute: ActivatedRoute, private router: Router) {}
+    constructor(private countriesService: CountriesService, private activatedRoute: ActivatedRoute,
+                private router: Router, private authService: AuthService) {}
 
     ngOnInit(): void {
         const countryId = this.activatedRoute.snapshot.params['id'];
@@ -26,6 +28,10 @@ export class CountryComponent implements OnInit {
                 }
             }
         );
+    }
+
+    isUserValid(): boolean {
+        return this.authService.isUserValid();
     }
 
     updateCountry(id: Guid) {

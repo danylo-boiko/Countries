@@ -11,8 +11,7 @@ export class CountriesService {
     private apiBaseUri: string = 'http://localhost:3000/api/countries';
     public countries: Country[] = [];
 
-    constructor(private http: HttpClient) {
-    }
+    constructor(private http: HttpClient) {}
 
     getCountries(): Observable<any> {
         return this.http.get(this.apiBaseUri);

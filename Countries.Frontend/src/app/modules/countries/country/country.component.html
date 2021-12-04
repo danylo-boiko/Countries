@@ -7,7 +7,7 @@
                 <p>{{country.description}}</p>
             </mat-card-content>
             <mat-divider inset></mat-divider>
-            <mat-card-actions>
+            <mat-card-actions *ngIf="isUserValid()">
                 <button mat-button (click)="updateCountry(country.id)">Update</button>
                 <button mat-button (click)="deleteCountry(country.id)">Delete</button>
             </mat-card-actions>

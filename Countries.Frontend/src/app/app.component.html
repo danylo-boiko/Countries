@@ -2,9 +2,10 @@
     <mat-toolbar-row>
         <a mat-button [routerLink]="'/'">Home</a>
         <a mat-button [routerLink]="'/countries'">Countries</a>
-        <a mat-button [routerLink]="'/countries/create'">Add country</a>
-        <a mat-button [routerLink]="'/login'">Login</a>
-        <a mat-button [routerLink]="'/register'">Register</a>
+        <a mat-button [routerLink]="'/countries/create'" *ngIf="isUserValid()">Add country</a>
+        <a mat-button (click)="logout()" *ngIf="isUserValid()">Logout</a>
+        <a mat-button [routerLink]="'/login'" *ngIf="!isUserValid()">Login</a>
+        <a mat-button [routerLink]="'/register'" *ngIf="!isUserValid()">Register</a>
     </mat-toolbar-row>
 </mat-toolbar>
 

@@ -9,6 +9,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { AuthInterceptor } from "./interceptors/auth.interceptor";
 import { AuthModule } from "./modules/auth/auth.module";
+import { JWT_OPTIONS, JwtHelperService } from "@auth0/angular-jwt";
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -33,7 +34,12 @@ const routes: Routes = [
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
             multi: true
-        }
+        },
+        {
+            provide: JWT_OPTIONS,
+            useValue: JWT_OPTIONS
+        },
+        JwtHelperService
     ],
     bootstrap: [AppComponent]
 })
