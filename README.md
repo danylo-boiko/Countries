@@ -15,5 +15,3 @@ npm install -g @angular/cli
 
 ## Database
 In this project I used [PostgreSQL](https://www.postgresql.org/), you can use any other databases that is supported by [TypeORM](https://typeorm.io/).
-## Demo
-![Create new country](/assets/add.png)
